@@ -6,14 +6,14 @@ import { AppLayout } from 'components/appLayout'
 
 import { NavigationContext } from 'contexts/navigationContext'
 
-import Settings from 'routes/settings'
+import Join from 'routes/join'
 import Landing from 'routes/landing'
 import Legal from 'routes/legal'
 import Login from 'routes/login'
 import NotFound from 'routes/404'
 import Profile from 'routes/profile'
 import ResetPassword from 'routes/resetPassword'
-import SignUp from 'routes/signup'
+import Settings from 'routes/settings'
 
 import { normalizeLocation } from 'utils/normalizeLocation'
 
@@ -23,6 +23,9 @@ function getRoute(location: Location) {
   switch (location.pathname.slice(1).split('/')[0]) {
     case '':
       return <Landing />
+
+    case 'join':
+      return <Join />
 
     case 'legal':
       return <Legal />
@@ -35,9 +38,6 @@ function getRoute(location: Location) {
 
     case 'resetPassword':
       return <ResetPassword />
-
-    case 'signup':
-      return <SignUp />
 
     case 'settings':
       return <Settings />
