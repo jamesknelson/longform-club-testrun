@@ -3,9 +3,9 @@ import * as React from 'react'
 import { AuthLayout, AuthLayoutLinks } from 'components/authLayout'
 import { UnstyledLinkControl } from 'components/link'
 
-export default function Login() {
+export default function RecoverAccount() {
   return (
-    <AuthLayout title="Sign in">
+    <AuthLayout title="Recover Account">
       <form>
         <label>
           Your email
@@ -16,9 +16,7 @@ export default function Login() {
         <UnstyledLinkControl href="/join">
           Create New Account
         </UnstyledLinkControl>
-        <UnstyledLinkControl href="/recover">
-          Recover Account
-        </UnstyledLinkControl>
+        <UnstyledLinkControl href="/login">Sign In</UnstyledLinkControl>
       </AuthLayoutLinks>
     </AuthLayout>
   )

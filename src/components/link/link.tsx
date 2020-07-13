@@ -34,20 +34,13 @@ export function Link(props: LinkProps) {
   }
 
   return (
-    <a
-      href={href}
-      onClick={handleClick}
-      css={css`
-        color: inherit;
-        text-decoration: none;
-      `}
-      {...rest}>
+    <a href={href} onClick={handleClick} {...rest}>
       {children}
     </a>
   )
 }
 
-export const LinkControl = styled(Link)`
+export const UnstyledLinkControl = styled(Link)`
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;

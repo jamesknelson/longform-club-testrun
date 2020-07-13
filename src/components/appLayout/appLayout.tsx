@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { css } from 'styled-components/macro'
 
-import { Link } from 'components/link'
+import { UnstyledLinkControl } from 'components/link'
 
-import { colors } from 'theme'
+import { colors, shadows } from 'theme'
 
 import { AppLayoutClamp } from './appLayoutClamp'
 
@@ -25,7 +25,8 @@ export function AppLayout(props: AppLayoutProps) {
       <header
         css={css`
           background-color: white;
-          box-shadow: 0 1px 3px 2px rgba(0, 0, 0, 0.03);
+          box-shadow: ${shadows.drop()};
+          color: ${colors.primary};
           display: flex;
           justify-content: center;
         `}>
@@ -37,10 +38,9 @@ export function AppLayout(props: AppLayoutProps) {
               height: 50px;
               width: 100%;
             `}>
-            <Link
+            <UnstyledLinkControl
               href="/"
               css={css`
-                color: ${colors.primary};
                 display: flex;
                 align-items: center;
                 font-size: 18px;
@@ -49,13 +49,13 @@ export function AppLayout(props: AppLayoutProps) {
                 padding: 1rem 0;
               `}>
               longform
-            </Link>
+            </UnstyledLinkControl>
             <div
               css={css`
                 flex-grow: 1;
               `}
             />
-            <Link
+            <UnstyledLinkControl
               href="/settings"
               css={css`
                 display: flex;
@@ -71,8 +71,8 @@ export function AppLayout(props: AppLayoutProps) {
                 }
               `}>
               settings
-            </Link>
-            <Link
+            </UnstyledLinkControl>
+            <UnstyledLinkControl
               href="/login"
               css={css`
                 display: flex;
@@ -86,8 +86,8 @@ export function AppLayout(props: AppLayoutProps) {
                   text-decoration: underline;
                 }
               `}>
-              login
-            </Link>
+              sign in
+            </UnstyledLinkControl>
           </div>
         </AppLayoutClamp>
       </header>
@@ -99,6 +99,43 @@ export function AppLayout(props: AppLayoutProps) {
         `}>
         {children}
       </main>
+      <footer
+        css={css`
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          background-color: ${colors.primary};
+          box-shadow: ${shadows.drop()};
+          color: rgba(255, 255, 255, 0.33);
+          font-size: 10px;
+          font-weight: 500;
+          height: 50px;
+          text-align: center;
+          text-transform: uppercase;
+        `}>
+        Build longform yourself. Learn how with&nbsp;
+        <UnstyledLinkControl
+          href="/legal"
+          css={css`
+            text-decoration: underline;
+          `}>
+          React ＋ Bacon
+        </UnstyledLinkControl>
+        <span
+          css={css`
+            margin: 0 0.5rem;
+          `}>
+          &middot;
+        </span>
+        <UnstyledLinkControl
+          href="/legal"
+          css={css`
+            text-decoration: underline;
+          `}>
+          Legal
+        </UnstyledLinkControl>
+      </footer>
     </div>
   )
 }

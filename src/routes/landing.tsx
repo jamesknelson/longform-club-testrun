@@ -2,8 +2,8 @@ import * as React from 'react'
 import { css } from 'styled-components/macro'
 
 import { AppLayoutClamp } from 'components/appLayout'
-import { ButtonBody } from 'components/buttonBody'
-import { LinkControl } from 'components/link'
+import { ButtonBody } from 'components/button'
+import { UnstyledLinkControl } from 'components/link'
 
 import { colors } from 'theme'
 
@@ -12,7 +12,7 @@ export default function Landing() {
     <AppLayoutClamp>
       <div
         css={css`
-          padding-top: 1rem;
+          padding: 1rem 0;
         `}>
         <h1
           css={css`
@@ -35,9 +35,9 @@ export default function Landing() {
             margin-bottom: 1.5rem;
           `}
         />
-        <LinkControl href="/signup">
+        <UnstyledLinkControl href="/signup">
           <ButtonBody>Join</ButtonBody>
-        </LinkControl>
+        </UnstyledLinkControl>
       </div>
     </AppLayoutClamp>
   )

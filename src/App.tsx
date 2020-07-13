@@ -12,7 +12,7 @@ import Legal from 'routes/legal'
 import Login from 'routes/login'
 import NotFound from 'routes/404'
 import Profile from 'routes/profile'
-import ResetPassword from 'routes/resetPassword'
+import RecoverAccount from 'routes/recoverAccount'
 import Settings from 'routes/settings'
 
 import { normalizeLocation } from 'utils/normalizeLocation'
@@ -36,8 +36,8 @@ function getRoute(location: Location) {
     case 'profile':
       return <Profile />
 
-    case 'resetPassword':
-      return <ResetPassword />
+    case 'recover':
+      return <RecoverAccount />
 
     case 'settings':
       return <Settings />
