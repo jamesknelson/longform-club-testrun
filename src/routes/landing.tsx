@@ -1,44 +1,18 @@
 import * as React from 'react'
-import { css } from 'styled-components/macro'
 
-import { AppLayoutClamp } from 'components/appLayout'
-import { ButtonBody } from 'components/button'
-import { UnstyledLinkControl } from 'components/link'
-
-import { colors } from 'theme'
+import { Link } from 'components/link'
 
 export default function Landing() {
   return (
-    <AppLayoutClamp>
-      <div
-        css={css`
-          padding: 1rem 0;
-        `}>
-        <h1
-          css={css`
-            color: ${colors.primary};
-            font-size: 2rem;
-            line-height: 2.3rem;
-            margin: 2rem 0 1rem;
-          `}>
-          Leave Outrage Behind
-        </h1>
-        <p
-          css={css`
-            color: ${colors.text.default};
-          `}>
+    <div>
+      <div>
+        <h1>Leave Outrage Behind</h1>
+        <p>
           Deactivating your Twitter account is easy, but keeping it that way?
           Longform keeps you honest by tracking your social network downtime.
         </p>
-        <div
-          css={css`
-            margin-bottom: 1.5rem;
-          `}
-        />
-        <UnstyledLinkControl href="/signup">
-          <ButtonBody>Join</ButtonBody>
-        </UnstyledLinkControl>
+        <Link href="/signup">Join</Link>
       </div>
-    </AppLayoutClamp>
+    </div>
   )
 }

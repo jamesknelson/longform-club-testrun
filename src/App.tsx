@@ -17,8 +17,6 @@ import Settings from 'routes/settings'
 
 import { normalizeLocation } from 'utils/normalizeLocation'
 
-import { GlobalStyle } from './globalStyles'
-
 function getRoute(location: Location) {
   switch (location.pathname.slice(1).split('/')[0]) {
     case '':
@@ -78,7 +76,6 @@ function App(props: AppProps) {
 
   return (
     <NavigationContext.Provider value={navigationContext}>
-      <GlobalStyle />
       <AppLayout>{getRoute(location)}</AppLayout>
     </NavigationContext.Provider>
   )

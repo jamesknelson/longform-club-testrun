@@ -1,4 +1,4 @@
-/// <reference types="styled-components/cssprop" />
+import './globalStyles.css'
 
 import { createBrowserHistory } from 'history'
 import React from 'react'

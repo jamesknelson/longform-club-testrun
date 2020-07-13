@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { AuthLayout, AuthLayoutLinks } from 'components/authLayout'
-import { UnstyledLinkControl } from 'components/link'
+import { AuthLayout } from 'components/authLayout'
+import { Link } from 'components/link'
 
 export default function Login() {
   return (
@@ -12,14 +12,9 @@ export default function Login() {
           <input type="email" value="" />
         </label>
       </form>
-      <AuthLayoutLinks>
-        <UnstyledLinkControl href="/join">
-          Create New Account
-        </UnstyledLinkControl>
-        <UnstyledLinkControl href="/recover">
-          Recover Account
-        </UnstyledLinkControl>
-      </AuthLayoutLinks>
+      <hr />
+      <Link href="/join">Create New Account</Link>{' '}
+      <Link href="/recover">Recover Account</Link>
     </AuthLayout>
   )
 }

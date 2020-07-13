@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useContext } from 'react'
-import styled, { css } from 'styled-components/macro'
 
 import { NavigationContext } from 'contexts/navigationContext'
 
@@ -39,16 +38,3 @@ export function Link(props: LinkProps) {
     </a>
   )
 }
-
-export const UnstyledLinkControl = styled(Link)`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: stretch;
-
-  appearance: none;
-  color: inherit;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
-`
