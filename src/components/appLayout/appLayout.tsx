@@ -12,7 +12,9 @@ export function AppLayout(props: AppLayoutProps) {
   return (
     <div className="AppLayout">
       <header>
-        <strong>longform</strong>
+        <Link href="/">
+          <strong>longform</strong>
+        </Link>
         <nav>
           <Link href="/settings">settings</Link>{' '}
           <Link href="/login">sign in</Link>

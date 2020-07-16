@@ -1,9 +1,11 @@
 import * as React from 'react'
 
+import { mount } from 'utils/routing'
+
 import AccountDetails from './accountDetails'
 import ChangePassword from './changePassword'
 
-export default function Settings() {
+function Settings() {
   return (
     <div>
       <h1>Settings</h1>
@@ -11,3 +13,9 @@ export default function Settings() {
     </div>
   )
 }
+
+export default mount({
+  './': <Settings />,
+  './account-details': <AccountDetails />,
+  './change-password': <ChangePassword />,
+})

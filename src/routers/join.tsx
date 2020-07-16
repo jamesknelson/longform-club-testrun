@@ -7,24 +7,18 @@ import { Link } from 'components/link'
 
 export default function Join() {
   const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    alert(`hi ${name}, welcome onboard!`)
+    alert(`hi}, welcome onboard!`)
   }
 
   return (
     <AuthLayout title="Join in">
       <p>Every journey starts with a single step.</p>
       <form onSubmit={handleSubmit}>
-        <label>
-          Name
-          <br />
-          <Input onChange={setName} value={name} />
-        </label>
         <label>
           Email
           <br />

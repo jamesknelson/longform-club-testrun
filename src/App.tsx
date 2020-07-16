@@ -1,4 +1,4 @@
-import { History, Location } from 'history'
+import { History, Path, parsePath } from 'history'
 import * as React from 'react'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -6,77 +6,73 @@ import { AppLayout } from 'components/appLayout'
 
 import { NavigationContext } from 'contexts/navigationContext'
 
-import Join from 'routes/join'
-import Landing from 'routes/landing'
-import Legal from 'routes/legal'
-import Login from 'routes/login'
-import NotFound from 'routes/404'
-import Profile from 'routes/profile'
-import RecoverAccount from 'routes/recoverAccount'
-import Settings from 'routes/settings'
+import { getRouteMatchAndRedirect } from 'utils/routing'
 
-import { normalizeLocation } from 'utils/normalizeLocation'
-
-function getRoute(location: Location) {
-  switch (location.pathname.slice(1).split('/')[0]) {
-    case '':
-      return <Landing />
-
-    case 'join':
-      return <Join />
-
-    case 'legal':
-      return <Legal />
-
-    case 'login':
-      return <Login />
-
-    case 'profile':
-      return <Profile />
-
-    case 'recover':
-      return <RecoverAccount />
-
-    case 'settings':
-      return <Settings />
-
-    default:
-      return <NotFound />
-  }
-}
+import indexRouter from './routers'
 
 interface AppProps {
   history: History
+  initialRoute: React.ReactElement | null
 }
 
 function App(props: AppProps) {
-  const { history } = props
-  const [location, setLocation] = useState(normalizeLocation(history.location))
+  const { history, initialRoute } = props
+  const [navigationState, setNavigationState] = useState({
+    location: history.location as Path,
+    route: initialRoute,
+  })
+
+  const [currentUser, setCurrentUser] = useState(null)
 
   const navigationContext = useMemo(
     () => ({
-      location,
-      navigate: (path: string) => history.push(path),
+      ...navigationState,
+      navigate: (path: string) =>
+        history.push({ search: '', hash: '', ...parsePath(path) }),
     }),
-    [history, location],
+    [history, navigationState],
   )
 
   useEffect(() => {
+    const [route, redirectLocation] = getRouteMatchAndRedirect(
+      indexRouter,
+      history.location,
+      {
+        currentUser: null,
+      },
+    )
+    if (redirectLocation) {
+      history.replace(redirectLocation)
+    }
+    setNavigationState({
+      location: redirectLocation || history.location,
+      route: route,
+    })
+
     const unlisten = history.listen(({ location }) => {
-      const normalizedLocation = normalizeLocation(location)
-      if (normalizedLocation.pathname !== location.pathname) {
-        history.replace(normalizedLocation)
-      } else {
-        setLocation(normalizedLocation)
+      const [route, redirectLocation] = getRouteMatchAndRedirect(
+        indexRouter,
+        location,
+        {
+          // TODO
+          currentUser: null,
+        },
+      )
+      if (redirectLocation) {
+        history.replace(redirectLocation)
       }
+      setNavigationState({
+        location: redirectLocation || location,
+        route: route,
+      })
     })
 
     return unlisten
-  }, [history])
+  }, [currentUser, history])
 
   return (
     <NavigationContext.Provider value={navigationContext}>
-      <AppLayout>{getRoute(location)}</AppLayout>
+      <AppLayout>{navigationState.route}</AppLayout>
     </NavigationContext.Provider>
   )
 }

@@ -1,8 +1,8 @@
-import { Location } from 'history'
+import { Path } from 'history'
 import { createContext } from 'react'
 
 export interface NavigationContext {
-  location: Location
+  location: Path
   navigate: (href: string) => void
 }
 

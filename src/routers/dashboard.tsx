@@ -1,9 +1,9 @@
 import * as React from 'react'
 
-export default function Profile() {
+export default function Dashboard() {
   return (
     <div>
-      <h1>Profile</h1>
+      <h1>Dashboard</h1>
       <p>Blurb blurb blurb</p>
     </div>
   )
