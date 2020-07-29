@@ -253,8 +253,10 @@ export function useRouter<
         transition(replace ? 'replace' : 'push', method, (location) =>
           locationReducer(location, parseDelta(delta)),
         ),
-      reload: (): Promise<void> =>
-        transition('replace', 'GET', (location) => location),
+      reload: (): Promise<void> => {
+        cache.clear()
+        return transition('replace', 'GET', (location) => location)
+      },
     }),
     [act, basename, cache, locationReducer, transition, router],
   )

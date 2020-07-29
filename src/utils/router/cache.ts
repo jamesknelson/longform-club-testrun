@@ -1,4 +1,5 @@
 export interface RouterCache {
+  clear(): void
   bucket<Key extends object = any, Value = any>(
     key: any,
   ): RouterCacheBucket<Key, Value>
@@ -20,5 +21,6 @@ export const createRouterCache = (): RouterCache => {
     }
     return map
   }
-  return { bucket }
+  const clear = () => buckets.clear()
+  return { bucket, clear }
 }
