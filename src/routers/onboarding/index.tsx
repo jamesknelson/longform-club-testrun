@@ -1,12 +1,12 @@
 import * as React from 'react'
 
-import { mount } from 'utils/routing'
+import { createRouter } from 'utils/router'
 
 import ConnectTwitter from './connectTwitter'
 import Payment from './payment'
 import Thankyou from './thankyou'
 
-export default mount({
+export default createRouter({
   './connect-twitter': <ConnectTwitter />,
   './payment': <Payment />,
   './thankyou': <Thankyou />,

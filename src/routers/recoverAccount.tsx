@@ -1,9 +1,11 @@
 import * as React from 'react'
 
 import { AuthLayout } from 'components/authLayout'
-import { Link } from 'components/link'
 
-export default function RecoverAccount() {
+import { Link } from 'utils/router'
+import { requireNoAuth } from 'utils/routing'
+
+function RecoverAccount() {
   return (
     <AuthLayout title="Recover Account">
       <form>
@@ -18,3 +20,5 @@ export default function RecoverAccount() {
     </AuthLayout>
   )
 }
+
+export default requireNoAuth(() => <RecoverAccount />, '/dashboard')

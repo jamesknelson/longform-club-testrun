@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { useContext } from 'react'
 
-import { NavigationContext } from 'contexts/navigationContext'
+import { useNavigation } from '../hooks/useNavigation'
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -12,7 +11,7 @@ export interface LinkProps
 export function Link(props: LinkProps) {
   const { children, href, ...rest } = props
 
-  const { navigate } = useContext(NavigationContext)
+  const { navigate } = useNavigation()
 
   const handleClick = (event: React.MouseEvent) => {
     // Don't hijack navigation when a modifier is being pressed,

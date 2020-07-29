@@ -1,7 +1,8 @@
 import * as React from 'react'
 
 import { AuthLayout } from 'components/authLayout'
-import { Link } from 'components/link'
+
+import { Link } from 'utils/router'
 
 export default function Login() {
   return (

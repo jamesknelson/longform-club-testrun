@@ -1,30 +1,16 @@
 import './globalStyles.css'
 
-import { createBrowserHistory } from 'history'
 import React from 'react'
-import ReactDOM from 'react-dom'
-
-import { getRouteMatchAndRedirect } from 'utils/routing'
+import { unstable_createRoot as createRoot, render } from 'react-dom'
 
 import App from './App'
-import indexRouter from './routers'
 
-const history = createBrowserHistory()
-const [initialRoute, initialRedirect] = getRouteMatchAndRedirect(
-  indexRouter,
-  history.location,
-  {
-    currentUser: undefined,
-  },
-)
-
-if (initialRedirect) {
-  history.replace(initialRedirect)
-}
-
-ReactDOM.render(
+const app = (
   <React.StrictMode>
-    <App history={history} initialRoute={initialRoute} />
-  </React.StrictMode>,
-  document.getElementById('root'),
+    <App />
+  </React.StrictMode>
 )
+const node = document.getElementById('root')!
+
+createRoot(node).render(app)
+// render(app, node)

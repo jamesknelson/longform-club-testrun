@@ -3,7 +3,8 @@ import { useState } from 'react'
 
 import { AuthLayout } from 'components/authLayout'
 import { Input } from 'components/input'
-import { Link } from 'components/link'
+
+import { Link } from 'utils/router'
 
 export default function Join() {
   const [email, setEmail] = useState('')
