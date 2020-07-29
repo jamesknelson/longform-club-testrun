@@ -3,7 +3,12 @@ import { Suspense, useCallback, useState } from 'react'
 
 import { AppLayout } from 'components/appLayout'
 
-import { Router, RouterContent, RouterFunction } from 'utils/router'
+import {
+  Router,
+  RouterContent,
+  RouterFunction,
+  usePendingRequest,
+} from 'utils/router'
 
 import indexRouter from './routers'
 
@@ -29,8 +34,14 @@ function App() {
           <RouterContent />
         </Suspense>
       </AppLayout>
+      <AppRouteLoadingIndicator />
     </Router>
   )
+}
+
+function AppRouteLoadingIndicator() {
+  const pendingRequest = usePendingRequest()
+  return pendingRequest ? <div className="AppRouteLoadingIndicator" /> : null
 }
 
 export default App

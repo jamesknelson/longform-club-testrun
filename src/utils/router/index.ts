@@ -7,6 +7,8 @@ export * from './components/routerContent'
 export * from './components/routerEnvironment'
 
 export * from './hooks/useNavigation'
+export * from './hooks/usePendingRequest'
+export * from './hooks/useRequest'
 export * from './hooks/useRouter'
 
 export * from './routers/createAsyncRouter'
