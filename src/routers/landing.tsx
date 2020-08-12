@@ -1,6 +1,5 @@
 import * as React from 'react'
-
-import { Link } from 'utils/router'
+import { Link } from 'react-routing-library'
 
 export default function Landing() {
   return (
@@ -11,7 +10,7 @@ export default function Landing() {
           Deactivating your Twitter account is easy, but keeping it that way?
           Longform keeps you honest by tracking your social network downtime.
         </p>
-        <Link href="/join">Join</Link>
+        <Link to="/join">Join</Link>
       </div>
     </div>
   )

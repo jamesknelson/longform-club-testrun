@@ -13,4 +13,3 @@ const app = (
 const node = document.getElementById('root')!
 
 createRoot(node).render(app)
-// render(app, node)

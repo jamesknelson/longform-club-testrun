@@ -1,13 +1,12 @@
 import * as React from 'react'
-
 import {
-  RouterFunction,
+  Router,
   RouterDelta,
   RouterRequest,
   RouterResponse,
   createHref,
   createRedirectRouter,
-} from './router'
+} from 'react-routing-library'
 
 import Loading from '../routers/loading'
 
@@ -15,7 +14,7 @@ export interface AppRequest extends RouterRequest {
   currentUser: any
 }
 
-export type AppRouter = RouterFunction<AppRequest>
+export type AppRouter = Router<AppRequest>
 
 export const loadingScreenRouter = () => <Loading />
 

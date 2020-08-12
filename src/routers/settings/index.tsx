@@ -1,6 +1,5 @@
 import * as React from 'react'
-
-import { createRouter } from 'utils/router'
+import { createPatternRouter } from 'react-routing-library'
 
 import AccountDetails from './accountDetails'
 import ChangePassword from './changePassword'
@@ -14,7 +13,7 @@ function Settings() {
   )
 }
 
-export default createRouter({
+export default createPatternRouter({
   './': <Settings />,
   './account-details': <AccountDetails />,
   './change-password': <ChangePassword />,

@@ -1,8 +1,8 @@
 import * as React from 'react'
+import { Link } from 'react-routing-library'
 
 import { AuthLayout } from 'components/authLayout'
 
-import { Link } from 'utils/router'
 import { requireNoAuth } from 'utils/routing'
 
 function RecoverAccount() {
@@ -15,8 +15,8 @@ function RecoverAccount() {
         </label>
       </form>
       <hr />
-      <Link href="/join">Create New Account</Link>{' '}
-      <Link href="/login">Sign In</Link>
+      <Link to="/join">Create New Account</Link>{' '}
+      <Link to="/login">Sign In</Link>
     </AuthLayout>
   )
 }

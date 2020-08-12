@@ -1,6 +1,6 @@
 import * as React from 'react'
+import { createPatternRouter, createLazyRouter } from 'react-routing-library'
 
-import { createRouter, createLazyRouter } from 'utils/router'
 import { AppRouter, requireAuth, requireNoAuth } from 'utils/routing'
 
 import Dashboard from './dashboard'
@@ -15,7 +15,7 @@ const Legal = React.lazy(async () => {
   return import('./legal')
 })
 
-const indexRouter: AppRouter = createRouter({
+const indexRouter: AppRouter = createPatternRouter({
   './': <Landing />,
   './dashboard': requireAuth(() => <Dashboard />),
   './join': requireNoAuth(() => <Join />, '/dashboard'),

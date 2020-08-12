@@ -1,8 +1,7 @@
 import * as React from 'react'
+import { Link } from 'react-routing-library'
 
 import { AuthLayout } from 'components/authLayout'
-
-import { Link } from 'utils/router'
 
 export default function Login() {
   return (
@@ -14,8 +13,8 @@ export default function Login() {
         </label>
       </form>
       <hr />
-      <Link href="/join">Create New Account</Link>{' '}
-      <Link href="/recover">Recover Account</Link>
+      <Link to="/join">Create New Account</Link>{' '}
+      <Link to="/recover">Recover Account</Link>
     </AuthLayout>
   )
 }

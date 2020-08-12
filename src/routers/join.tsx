@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-routing-library'
 
 import { AuthLayout } from 'components/authLayout'
 import { Input } from 'components/input'
-
-import { Link } from 'utils/router'
 
 export default function Join() {
   const [email, setEmail] = useState('')
@@ -33,8 +32,8 @@ export default function Join() {
         <button type="submit">Join</button>
       </form>
       <hr />
-      <Link href="/login">Sign In</Link>{' '}
-      <Link href="/recover">Recover Account</Link>
+      <Link to="/login">Sign In</Link>{' '}
+      <Link to="/recover">Recover Account</Link>
     </AuthLayout>
   )
 }
