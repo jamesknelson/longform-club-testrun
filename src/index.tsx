@@ -1,7 +1,7 @@
 import './globalStyles.css'
 
 import React from 'react'
-import { unstable_createRoot as createRoot, render } from 'react-dom'
+import { unstable_createRoot as createRoot } from 'react-dom'
 
 import App from './App'
 

@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { Link } from 'react-routing-library'
+import { Link } from 'retil-router'
+
+import { useAuthController, useCurrentUser } from 'auth'
 
 export interface AppLayoutProps {
   children: React.ReactNode
 }
 
+export const LoadingUser = {}
+
 export function AppLayout(props: AppLayoutProps) {
   const { children } = props
+  const { signOut } = useAuthController()
+  const currentUser = useCurrentUser({ defaultValue: LoadingUser })
 
   return (
     <div className="AppLayout">
@@ -15,8 +21,19 @@ export function AppLayout(props: AppLayoutProps) {
           <strong>longform</strong>
         </Link>
         <nav>
-          <Link to="/settings">settings</Link>{' '}
-          <Link to="/login">sign in</Link>
+          {currentUser !== LoadingUser &&
+            (currentUser ? (
+              <>
+                <Link to="/settings">settings</Link> &nbsp;
+                <button onClick={signOut}>logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/login">sign in</Link>
+                &nbsp;
+                <Link to="/join">join</Link>{' '}
+              </>
+            ))}
         </nav>
       </header>
       <main>{children}</main>

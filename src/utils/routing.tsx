@@ -1,12 +1,12 @@
 import * as React from 'react'
 import {
-  Router,
-  RouterDelta,
+  RouterAction,
+  RouterFunction,
   RouterRequest,
   RouterResponse,
   createHref,
-  createRedirectRouter,
-} from 'react-routing-library'
+  routeRedirect,
+} from 'retil-router'
 
 import Loading from '../routers/loading'
 
@@ -14,7 +14,7 @@ export interface AppRequest extends RouterRequest {
   currentUser: any
 }
 
-export type AppRouter = Router<AppRequest>
+export type AppRouter = RouterFunction<AppRequest>
 
 export const loadingScreenRouter = () => <Loading />
 
@@ -38,7 +38,7 @@ export function requireAuth(
   return switchAuth({
     authenticated: authenticatedRouter,
     pending: pendingRouter,
-    unauthenticated: createRedirectRouter(
+    unauthenticated: routeRedirect(
       (request) =>
         '/login?redirectTo=' + encodeURIComponent(createHref(request)),
     ),
@@ -53,12 +53,12 @@ export function requireNoAuth<
   unauthenticatedHandler: AppRouter,
   redirectLocation:
     | string
-    | RouterDelta
-    | ((request: AppRequest) => string | RouterDelta),
+    | RouterAction<any>
+    | ((request: AppRequest) => string | RouterAction<any>),
   pendingHandler: AppRouter = loadingScreenRouter,
 ) {
   return switchAuth({
-    authenticated: createRedirectRouter(redirectLocation),
+    authenticated: routeRedirect(redirectLocation),
     pending: pendingHandler,
     unauthenticated: unauthenticatedHandler,
   })

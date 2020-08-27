@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Link } from 'react-routing-library'
+import { Link } from 'retil-router'
 
 import { AuthLayout } from 'components/authLayout'
 

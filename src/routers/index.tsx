@@ -1,12 +1,18 @@
 import * as React from 'react'
-import { createPatternRouter, createLazyRouter } from 'react-routing-library'
+import { routeByPattern, routeLazy, routeNotFoundBoundary } from 'retil-router'
 
-import { AppRouter, requireAuth, requireNoAuth } from 'utils/routing'
+import {
+  AppRequest,
+  AppRouter,
+  requireAuth,
+  requireNoAuth,
+} from 'utils/routing'
 
 import Dashboard from './dashboard'
 import Join from './join'
 import Landing from './landing'
 import Login from './login'
+import NotFound from './notFound'
 import onboardingRouter from './onboarding'
 import settingsRouter from './settings'
 
@@ -15,7 +21,7 @@ const Legal = React.lazy(async () => {
   return import('./legal')
 })
 
-const indexRouter: AppRouter = createPatternRouter({
+const indexPatternRouter: AppRouter = routeByPattern({
   './': <Landing />,
   './dashboard': requireAuth(() => <Dashboard />),
   './join': requireNoAuth(() => <Join />, '/dashboard'),
@@ -25,11 +31,16 @@ const indexRouter: AppRouter = createPatternRouter({
     (request) => (request.query.redirectTo as string) || '/dashboard',
   ),
   './onboarding': requireAuth(() => onboardingRouter),
-  './recover': createLazyRouter(async () => {
+  './recover': routeLazy(async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000))
     return import('./recoverAccount')
   }),
   './settings/*': requireAuth(settingsRouter),
 })
+
+const indexRouter = routeNotFoundBoundary(
+  indexPatternRouter,
+  (request: AppRequest) => <NotFound request={request} />,
+)
 
 export default indexRouter

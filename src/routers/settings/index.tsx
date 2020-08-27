@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { createPatternRouter } from 'react-routing-library'
+import { routeByPattern } from 'retil-router'
 
 import AccountDetails from './accountDetails'
 import ChangePassword from './changePassword'
@@ -13,7 +13,7 @@ function Settings() {
   )
 }
 
-export default createPatternRouter({
+export default routeByPattern({
   './': <Settings />,
   './account-details': <AccountDetails />,
   './change-password': <ChangePassword />,

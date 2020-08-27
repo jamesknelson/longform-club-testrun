@@ -1663,21 +1663,6 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
-"@retil/common@^0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@retil/common/-/common-0.5.1.tgz#01e31ef04413574a9ce512b55dc53b570e7d15cd"
-  integrity sha512-LSazJNzBPCWZ+M/SBxbZ3W9IbPT7zGISDDrcXVkDi2cnkeYHO72C+eqynJI7OzmfBQGPflKope3VHqVf2SgLrQ==
-  dependencies:
-    tslib "2.0.1"
-
-"@retil/source@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@retil/source/-/source-0.5.2.tgz#5f102f59d7365b5bfb376778366cfd6e7b65562b"
-  integrity sha512-7UJ2G3EnnfMyoKwR7mofC6Rc1rg17HhgYDg9QidDI8KwTbvPS6aF+iBsXRAolkRwjxtYLVn4nLiQxoiyDmiLKQ==
-  dependencies:
-    "@retil/common" "^0.5.1"
-    tslib "2.0.1"
-
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.3.tgz#5405ee8e444ed212db44e79351f0c70a582aae25"
@@ -7153,11 +7138,6 @@ mem@^4.0.0:
     mimic-fn "^2.0.0"
     p-is-promise "^2.0.0"
 
-memoize-one@^5.1.1:
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
-  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
-
 memory-fs@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/memory-fs/-/memory-fs-0.4.1.tgz#3a9a20b8462523e447cfbc7e8bb80ed667bfc552"
@@ -9169,15 +9149,6 @@ react-is@^16.12.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-routing-library@^0.17.0:
-  version "0.17.0"
-  resolved "https://registry.yarnpkg.com/react-routing-library/-/react-routing-library-0.17.0.tgz#27c7968b9f2381da29caf2b28f4ffd25d2be149f"
-  integrity sha512-PlKhS1W3RpZbcPdD/N1dONfsXo0XXEICm2ljFZ5L8V+OWVMhCR6rX902esYEIQdiW/3r4947gmqQUB+H38c8sw==
-  dependencies:
-    history "^5.0.0"
-    path-to-regexp "^6.1.0"
-    querystring "^0.2.0"
-
 react-scripts@3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-3.4.1.tgz#f551298b5c71985cc491b9acf3c8e8c0ae3ada0a"
@@ -9587,15 +9558,43 @@ ret@~0.1.10:
   resolved "https://registry.yarnpkg.com/ret/-/ret-0.1.15.tgz#b8a4825d5bdb1fc3f6f53c2bc33f81388681c7bc"
   integrity sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg==
 
-retil@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/retil/-/retil-0.5.2.tgz#eee23887f183551a0baf8942c2680ec1c7f4afba"
-  integrity sha512-UqZqs6bv2R/sQRNAA4dOtP90h5epFNGmoEQu582wqvVqCGNoe57WmQaRJxHU/8KBhENECBwC512x8J1jx7ho3w==
+retil-history@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/retil-history/-/retil-history-0.11.1.tgz#37b2c30f7913056d3d19a7aa2724ecf3921f728f"
+  integrity sha512-MWS9o+7H5wddE9bdLet/JKaU4tqc1NJTXKloUvk7OhbXkj3pdAEFC4MJOGCBCQWTFwipH5q6qEgCpbrocfX3DQ==
   dependencies:
-    "@retil/common" "^0.5.1"
-    "@retil/source" "^0.5.2"
+    history "^5.0.0"
+    querystring "^0.2.0"
+    retil-source "^0.11.1"
+    retil-support "^0.11.1"
     tslib "2.0.1"
-    use-source "^0.5.2"
+
+retil-router@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/retil-router/-/retil-router-0.11.2.tgz#4904a96db7c6c630c8be69626e5e2e9d799b958b"
+  integrity sha512-Bb2lNrHqlcw/ciXFxiGadvLsQNG4KaITa6j2xXC8VxAo5GRBFf9eEkzYaY5kaxeFtfuXuxiEKb/UXur/erg2Ug==
+  dependencies:
+    path-to-regexp "^6.1.0"
+    retil-history "^0.11.1"
+    retil-source "^0.11.1"
+    retil-support "^0.11.1"
+    tslib "2.0.1"
+    use-source "^0.11.1"
+
+retil-source@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/retil-source/-/retil-source-0.11.1.tgz#b15b070fd5665fcb25a9324cf6bd5e73dd27ba68"
+  integrity sha512-sqJvT/d2/CC9GoATvCV4pLQzBR960Qwxg+IAA7m9dkQgNydg8JavChUDHxK1CUe6XrYxpGdjUqUduh5bA8lidg==
+  dependencies:
+    retil-support "^0.11.1"
+    tslib "2.0.1"
+
+retil-support@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/retil-support/-/retil-support-0.11.1.tgz#68eee208f4b65df55e16071ddf4eee811c230003"
+  integrity sha512-gjbB70mH33Tqv6x1DKg7ee+LC2HUBIfSD0MtX/xjUDvpXWqSh9ByaWauXG4HdPd7VWR3x5c+qkjiVfs3ap5E8g==
+  dependencies:
+    tslib "2.0.1"
 
 retry@^0.12.0:
   version "0.12.0"
@@ -10859,12 +10858,12 @@ url@^0.11.0:
     punycode "1.3.2"
     querystring "0.2.0"
 
-use-source@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/use-source/-/use-source-0.5.2.tgz#d78f62583ffcc40fe90823335f1e0dbab31d7ee8"
-  integrity sha512-a8jsbjVTTuPFUZW44DWQzi1tM+2xQ45f5YrtlYrEpdf/pAwoZAbbX9Kq+DMy/JtUb3BySchCHcSYCCi7bo77fQ==
+use-source@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/use-source/-/use-source-0.11.1.tgz#1e33c1b6701edfe9e1446e30084abb0c21ba415c"
+  integrity sha512-3m8Y8u16gVLtz1/HQzlK9lcNLF2Bwxg0f1Sf83Ceh8WUFPBIjYQIr9CdfWrpeWLjI8MLBQQ8uuyJje9kMnIKgg==
   dependencies:
-    "@retil/source" "^0.5.2"
+    retil-source "^0.11.1"
     tslib "2.0.1"
     use-subscription "1.4.1"
 

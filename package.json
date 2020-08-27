@@ -4,11 +4,11 @@
   "private": true,
   "dependencies": {
     "firebase": "^7.17.1",
-    "memoize-one": "^5.1.1",
     "react": "0.0.0-experimental-94c0244ba",
     "react-dom": "0.0.0-experimental-94c0244ba",
-    "react-routing-library": "^0.17.0",
-    "retil": "^0.5.2"
+    "retil-router": "^0.11.2",
+    "retil-source": "^0.11.1",
+    "retil-support": "^0.11.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",

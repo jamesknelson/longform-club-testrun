@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { createPatternRouter } from 'react-routing-library'
+import { routeByPattern } from 'retil-router'
 
 import ConnectTwitter from './connectTwitter'
 import Payment from './payment'
 import Thankyou from './thankyou'
 
-export default createPatternRouter({
+export default routeByPattern({
   './connect-twitter': <ConnectTwitter />,
   './payment': <Payment />,
   './thankyou': <Thankyou />,

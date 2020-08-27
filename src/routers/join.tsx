@@ -1,24 +1,39 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { Link } from 'react-routing-library'
+import { Link } from 'retil-router'
 
+import { useAuthController } from 'auth'
 import { AuthLayout } from 'components/authLayout'
 import { Input } from 'components/input'
 
 export default function Join() {
+  const { createUserWithEmailAndPassword } = useAuthController()
+  const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  // - I want an operation hook, but I don't want to have to pass the
+  //   operations to the hook -- I want it to return a function that
+  //   I can call or something.
+
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-
-    alert(`hi}, welcome onboard!`)
+    createUserWithEmailAndPassword({
+      name,
+      email,
+      password,
+    })
   }
 
   return (
     <AuthLayout title="Join in">
       <p>Every journey starts with a single step.</p>
       <form onSubmit={handleSubmit}>
+        <label>
+          Name
+          <br />
+          <Input onChange={setName} value={name} />
+        </label>
         <label>
           Email
           <br />
