@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { Link } from 'retil-router'
 
-import { useAuthController, useCurrentUser } from 'auth'
+import { useAuthController, useCurrentUser } from 'hooks/useFirebaseAuth'
 
 export interface AppLayoutProps {
   children: React.ReactNode
 }
 
-export const LoadingUser = {}
+export const LoadingUser = { loading: true }
 
 export function AppLayout(props: AppLayoutProps) {
   const { children } = props
@@ -22,7 +22,7 @@ export function AppLayout(props: AppLayoutProps) {
         </Link>
         <nav>
           {currentUser !== LoadingUser &&
-            (currentUser ? (
+            (currentUser && !currentUser.isAnonymous ? (
               <>
                 <Link to="/settings">settings</Link> &nbsp;
                 <button onClick={signOut}>logout</button>

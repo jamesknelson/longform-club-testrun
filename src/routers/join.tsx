@@ -2,13 +2,13 @@ import * as React from 'react'
 import { useState } from 'react'
 import { Link } from 'retil-router'
 
-import { useAuthController } from 'auth'
+import { useAuthController } from 'hooks/useFirebaseAuth'
 import { AuthLayout } from 'components/authLayout'
 import { Input } from 'components/input'
 
 export default function Join() {
-  const { createUserWithEmailAndPassword } = useAuthController()
-  const [name, setName] = useState('')
+  const { createUserWithPassword } = useAuthController()
+  const [displayName, setDisplayName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -18,10 +18,12 @@ export default function Join() {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault()
-    createUserWithEmailAndPassword({
-      name,
+    createUserWithPassword({
+      displayName,
       email,
       password,
+    }).then(() => {
+      console.log('created!')
     })
   }
 
@@ -32,7 +34,7 @@ export default function Join() {
         <label>
           Name
           <br />
-          <Input onChange={setName} value={name} />
+          <Input onChange={setDisplayName} value={displayName} />
         </label>
         <label>
           Email

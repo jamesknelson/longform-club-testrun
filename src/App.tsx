@@ -1,68 +1,50 @@
 import * as React from 'react'
-import { Suspense, useCallback } from 'react'
-import { RouterProvider, useRouter, RouterRequest } from 'retil-router'
-import { useSource } from 'use-source'
-
-import { AuthProvider } from './auth'
-import { DBUser, db } from './backend'
-import { AppLayout } from './components/appLayout'
+import { Suspense } from 'react'
 import {
-  createFirebaseAuthService,
-  createFirestoreUserDataService,
-} from './hooks/useFirebaseAuth'
+  Router,
+  RouterContent,
+  createRequestService,
+  useRouterPending,
+} from 'retil-router'
+
+import './backend'
+// import { DBUser, db } from './backend'
+import { AppLayout } from './components/appLayout'
+import { AuthProvider } from './hooks/useFirebaseAuth'
 import indexRouter from './routers'
+import { createFirebaseAuthService } from './services/firebaseAuthService'
 
-const users = db.collection('users')
+// const users = db.collection('users')
 
-const [authSource, authController] = createFirebaseAuthService({
-  buildUser: (firebaseUser, data: DBUser) =>
-    firebaseUser.isAnonymous
-      ? null
-      : {
-          data,
-          email: firebaseUser.email,
-          emailVefiried: firebaseUser.emailVerified,
-          displayName: firebaseUser.displayName,
-          id: firebaseUser.uid,
-          photoURL: firebaseUser.photoURL,
-        },
+const [authSource, authController] = createFirebaseAuthService()
 
-  getDataService: (uid) => createFirestoreUserDataService(users, uid),
+const requestService = createRequestService({
+  extend: (_, use) => {
+    const { user } = use(authSource, { user: undefined })
+    return {
+      currentUser: user,
+    }
+  },
 })
 
 function App() {
-  const { currentUser } = useSource(authSource, {
-    defaultValue: {
-      currentUser: undefined,
-    },
-  })
-
-  const transformRequest = useCallback(
-    (request: RouterRequest<any>) => ({
-      ...request,
-      currentUser,
-    }),
-    [currentUser],
-  )
-
-  const route = useRouter(indexRouter, {
-    transformRequest,
-  })
-
   return (
-    <AuthProvider source={authSource} controller={authController}>
-      <RouterProvider value={route}>
+    <Router fn={indexRouter} requestService={requestService}>
+      <AuthProvider source={authSource} controller={authController}>
         <AppLayout>
-          <Suspense fallback={<AppSpinner />}>{route.content}</Suspense>
+          <Suspense fallback={<AppSpinner />}>
+            <RouterContent />
+          </Suspense>
         </AppLayout>
-        <AppRouteLoadingIndicator active={route.pending} />
-      </RouterProvider>
-    </AuthProvider>
+        <AppRouteLoadingIndicator />
+      </AuthProvider>
+    </Router>
   )
 }
 
 function AppRouteLoadingIndicator(props: { active?: boolean }) {
-  return props.active ? <div className="AppRouteLoadingIndicator" /> : null
+  const pending = useRouterPending()
+  return pending ? <div className="AppRouteLoadingIndicator" /> : null
 }
 
 function AppSpinner() {

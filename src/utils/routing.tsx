@@ -11,7 +11,7 @@ import {
 import Loading from '../routers/loading'
 
 export interface AppRequest extends RouterRequest {
-  currentUser: any
+  currentUser?: any
 }
 
 export type AppRouter = RouterFunction<AppRequest>
@@ -23,12 +23,13 @@ export function switchAuth(routers: {
   pending: AppRouter
   unauthenticated: AppRouter
 }): AppRouter {
-  return (request, response) =>
-    (request.currentUser === undefined
+  return (request, response) => {
+    return (request.currentUser === undefined
       ? routers.pending
-      : request.currentUser
+      : request.currentUser && !request.currentUser.isAnonymous
       ? routers.authenticated
       : routers.unauthenticated)(request, response)
+  }
 }
 
 export function requireAuth(
@@ -53,8 +54,8 @@ export function requireNoAuth<
   unauthenticatedHandler: AppRouter,
   redirectLocation:
     | string
-    | RouterAction<any>
-    | ((request: AppRequest) => string | RouterAction<any>),
+    | RouterAction
+    | ((request: AppRequest) => string | RouterAction),
   pendingHandler: AppRouter = loadingScreenRouter,
 ) {
   return switchAuth({

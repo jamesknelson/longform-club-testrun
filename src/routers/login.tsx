@@ -1,31 +1,47 @@
 import * as React from 'react'
 import { useState } from 'react'
-import { Link } from 'retil-router'
+import { Link, useWaitUntilNavigationCompletes } from 'retil-router'
 
-import { useAuthController } from 'auth'
 import { AuthLayout } from 'components/authLayout'
 import { Input } from 'components/input'
+import { useAuthController } from 'hooks/useFirebaseAuth'
+import { useOperation } from 'hooks/useOperation'
+import { Issues } from 'types/issues'
+
+const validateLogin = (data: any) => {
+  return null
+}
 
 export default function Login() {
-  const { signInWithEmailAndPassword } = useAuthController()
+  const authController = useAuthController()
+  const waitUntilNavigationCompletes = useWaitUntilNavigationCompletes()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  // - I want an operation hook, but I don't want to have to pass the
-  //   operations to the hook -- I want it to return a function that
-  //   I can call or something.
+  const [issues, setIssues] = useState<Issues | null>(null)
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const [login, loginPending] = useOperation(async (event: React.FormEvent) => {
     event.preventDefault()
-    signInWithEmailAndPassword({
-      email,
-      password,
-    })
-  }
+
+    const data = { email, password }
+    const issues = validateLogin({ email, password })
+
+    if (issues) {
+      setIssues(issues)
+    } else {
+      const issues = await authController.signInWithPassword(data)
+      if (issues) {
+        setIssues(issues)
+      } else {
+        return waitUntilNavigationCompletes()
+      }
+    }
+  })
 
   return (
     <AuthLayout title="Sign in">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={login}>
         <label>
           Email
           <br />
@@ -36,7 +52,9 @@ export default function Login() {
           <br />
           <Input type="password" onChange={setPassword} value={password} />
         </label>
-        <button type="submit">Sign in</button>
+        <button disabled={loginPending} type="submit">
+          {loginPending ? 'Signing in...' : 'Sign in'}
+        </button>
       </form>
       <hr />
       <Link to="/join">Create New Account</Link>{' '}

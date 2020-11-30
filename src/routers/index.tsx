@@ -23,7 +23,11 @@ const Legal = React.lazy(async () => {
 
 const indexPatternRouter: AppRouter = routeByPattern({
   './': <Landing />,
-  './dashboard': requireAuth(() => <Dashboard />),
+  './dashboard': routeLazy(async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    return { default: requireAuth(() => <Dashboard />) }
+  }),
+  // './dashboard': requireAuth(() => <Dashboard />),
   './join': requireNoAuth(() => <Join />, '/dashboard'),
   './legal': () => <Legal />,
   './login': requireNoAuth(
